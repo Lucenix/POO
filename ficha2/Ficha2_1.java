@@ -3,7 +3,7 @@ package com.poo.ficha2;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class Ficha2 {
+public class Ficha2_1 {
     //1
     int[] array1;
     int[] array2;
@@ -24,10 +24,10 @@ public class Ficha2 {
         this.array2 = array2;
     }
 
-    public Ficha2() {
+    public Ficha2_1() {
 
     }
-    public Ficha2(int[] array2) {
+    public Ficha2_1(int[] array2) {
         this.array2 = array2;
     }
 
@@ -41,14 +41,15 @@ public class Ficha2 {
     }
 
     public int[] between(int s, int f) {
-        int[] r = null;
+        int[] r;
         if (f<this.array1.length) {
             int i;
             r = new int[f-s+1];
 
-            for (i = 0; s<f; s++, i++)
-                r[i] = this.array2[s];
-        }
+            for (i = 0; s<=f; s++, i++)
+                r[i] = this.array1[s];
+        } else
+            r = null;
         return r;
     }
 
@@ -67,8 +68,8 @@ public class Ficha2 {
                 i1++;
             } else {
                 a1[w] = a1[i1];
-                while(a1[i1] == a1[w]) i1++;
-                while(a2[i2] == a1[w]) i2++;
+                while(i1 < a1.length && a1[i1] == a1[w]) i1++;
+                while(i2 < a2.length && a2[i2] == a1[w]) i2++;
                 w++;
             }
         }
@@ -76,4 +77,6 @@ public class Ficha2 {
         System.arraycopy(a1, 0, res, 0, w);
         return res;
     }
+
+
 }
