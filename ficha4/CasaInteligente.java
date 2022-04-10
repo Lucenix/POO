@@ -1,6 +1,7 @@
 package com.poo.ficha4;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CasaInteligente {
@@ -19,7 +20,7 @@ public class CasaInteligente {
     }
 
     public void setLampadas(ArrayList<Lampada> lampadas) {
-        this.lampadas = lampadas;
+        this.lampadas.addAll(lampadas);
     }
 
     @Override
@@ -95,5 +96,14 @@ public class CasaInteligente {
         //ver esta com atenção: tirar o top 3 pode ser complicado porque TreeSet esquece-se das que tiverem o mesmo custo.
         //usar um comparator que tem um compare que não veja só o custo como qualquer outra coisa que as diferencie, se houver
         //não há :C
+        Comparator<Lampada> c = (o1, o2) -> {
+            int test;
+            if ((test = Double.compare(o1.getConsumoTotal(), o2.getConsumoTotal()))!=0)
+                return test;
+            else
+                return Double.compare(o1.getPeriodoConsumo(), o2.getPeriodoConsumo());
+        };
+        return this.lampadas.stream().sorted(c).limit(3).collect(Collectors.toSet());
+        //retornar apenas o top 3
     }
 }
